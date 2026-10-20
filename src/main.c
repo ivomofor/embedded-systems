@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <stdint.h>
-#include <limits.h>
 
 int main(void)
 {
@@ -10,13 +9,27 @@ int main(void)
 
     printf("Initial LED state: %u\n", (unsigned int)led_state);
 
-    led_state = 1;
+    led_state = led_state | 1u;
 
-    printf("LED state after turning it on: %u\n",
-           (unsigned int)led_state);
+    printf("After turning on LED 0: %u\n", (unsigned int)led_state);
 
-    printf("Size of uint8_t: %zu byte(s)\n", sizeof(uint8_t));
-    printf("Maximum uint8_t value: %u\n", (unsigned int)UINT8_MAX);
+    led_state = led_state | 8u;
+
+    if ((led_state & 8u) != 0u) {
+        printf("LED 3 is ON\n");
+    } else {
+        printf("LED 3 is OFF\n");
+    }
+
+    printf("After turning on LED 3: %u\n", (unsigned int)led_state);
+
+    led_state = led_state & ~8u;
+
+    if ((led_state & 8u) != 0u) {
+        printf("LED 3 is ON\n");
+    } else {
+        printf("LED 3 is OFF\n");
+    }
 
     return 0;
 }
