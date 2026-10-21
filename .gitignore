@@ -1,5 +1,6 @@
-# Compiled executable
+# Compiled executables
 embedded_demo
+tests/test_gpio
 
 # IDE settings
 .idea/
