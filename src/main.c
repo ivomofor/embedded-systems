@@ -1,43 +1,6 @@
+#include "led.h"
+
 #include <stdio.h>
-#include <stdint.h>
-
-enum LEDState
-{
-    LED_OFF,
-    LED_ON
-};
-
-struct LED
-{
-    uint8_t id;
-    enum LEDState state;
-    uint32_t times_turned_on;
-};
-
-void led_on(struct LED *led)
-{
-    if (led->state == LED_OFF)
-    {
-        led->state = LED_ON;
-        led->times_turned_on++;
-    }
-}
-
-void led_off(struct LED *led)
-{
-    led->state = LED_OFF;
-}
-
-void print_led_info(const struct LED *led)
-{
-    printf("LED ID: %u\n", (unsigned int)led->id);
-
-    printf("LED state: %s\n",
-           led->state == LED_ON ? "ON" : "OFF");
-
-    printf("Times turned on: %u\n",
-           (unsigned int)led->times_turned_on);
-}
 
 int main(void)
 {
