@@ -4,7 +4,7 @@ CFLAGS = -std=c2x -Wall -Wextra -Wpedantic -g -Iinclude
 
 TARGET = embedded_demo
 
-SOURCES = src/main.c src/led.c
+SOURCES = src/main.c src/led.c src/gpio.c
 
 $(TARGET): $(SOURCES)
 	$(CC) $(CFLAGS) $(SOURCES) -o $(TARGET)

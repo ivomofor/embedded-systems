@@ -1,19 +1,23 @@
+#include "gpio.h"
+
 #include <stdio.h>
-#include <stdint.h>
 
 int main(void)
 {
-    volatile uint32_t status_register = 0;
+    gpio_set_pin(0);
+    gpio_set_pin(2);
 
-    volatile uint32_t *register_pointer = &status_register;
+    printf("Initial register: 0x%02X\n",
+           (unsigned int)gpio_read_register());
 
-    printf("Initial status: %u\n",
-           (unsigned int)*register_pointer);
+    printf("\nTrying to turn on invalid pin 8...\n");
+    gpio_set_pin(8);
 
-    *register_pointer = 1;
+    printf("Register after invalid operation: 0x%02X\n",
+           (unsigned int)gpio_read_register());
 
-    printf("Updated status: %u\n",
-           (unsigned int)*register_pointer);
+    printf("Reading invalid pin 8: %u\n",
+           (unsigned int)gpio_is_pin_set(8));
 
     return 0;
 }
