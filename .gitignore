@@ -1,6 +1,7 @@
 # Compiled executables
 embedded_demo
 tests/test_gpio
+tests/test_led
 
 # IDE settings
 .idea/
