@@ -77,6 +77,29 @@ int main(void)
 
     printf("PASS: Clearing one pin does not affect another.\n");
 
+    /* Test 7: Toggling an OFF pin turns it ON. */
+    gpio_clear_pin(3);
+    gpio_toggle_pin(3);
+
+    if (gpio_is_pin_set(3) != 1)
+    {
+        printf("FAIL: Toggling an OFF pin should turn it ON.\n");
+        return 1;
+    }
+
+    printf("PASS: Toggling an OFF pin turns it ON.\n");
+
+    /* Test 8: Toggling an ON pin turns it OFF. */
+    gpio_toggle_pin(3);
+
+    if (gpio_is_pin_set(3) != 0)
+    {
+        printf("FAIL: Toggling an ON pin should turn it OFF.\n");
+        return 1;
+    }
+
+    printf("PASS: Toggling an ON pin turns it OFF.\n");
+
     printf("All GPIO tests passed!\n");
 
     return 0;
