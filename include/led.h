@@ -12,6 +12,7 @@ enum LEDState
 struct LED
 {
     uint8_t id;
+    uint8_t pin;
     enum LEDState state;
     uint32_t times_turned_on;
 };

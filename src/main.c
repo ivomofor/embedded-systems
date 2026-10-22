@@ -1,28 +1,49 @@
 #include "gpio.h"
+#include "led.h"
 
 #include <stdio.h>
 
 int main(void)
 {
-    printf("Initial register: 0x%02X\n",
+    struct LED led1 = {
+        .id = 1,
+        .pin = 0,
+        .state = LED_OFF,
+        .times_turned_on = 0
+    };
+
+    struct LED led2 = {
+        .id = 2,
+        .pin = 3,
+        .state = LED_OFF,
+        .times_turned_on = 0
+    };
+
+    printf("Initial GPIO register: 0x%02X\n",
            (unsigned int)gpio_read_register());
 
-    gpio_set_pin(0);
-    gpio_set_pin(3);
+    printf("\nInitial LED states:\n");
+    print_led_info(&led1);
+    print_led_info(&led2);
 
-    printf("After setting pins 0 and 3: 0x%02X\n",
+    printf("\nTurning on both LEDs...\n");
+    led_on(&led1);
+    led_on(&led2);
+
+    print_led_info(&led1);
+    print_led_info(&led2);
+
+    printf("GPIO register: 0x%02X\n",
            (unsigned int)gpio_read_register());
 
-    gpio_clear_pin(0);
+    printf("\nTurning off LED 1...\n");
+    led_off(&led1);
 
-    printf("After clearing pin 0: 0x%02X\n",
+    print_led_info(&led1);
+    print_led_info(&led2);
+
+    printf("GPIO register: 0x%02X\n",
            (unsigned int)gpio_read_register());
-
-    printf("Pin 0 state: %u\n",
-           (unsigned int)gpio_is_pin_set(0));
-
-    printf("Pin 3 state: %u\n",
-           (unsigned int)gpio_is_pin_set(3));
 
     return 0;
 }

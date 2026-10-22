@@ -1,4 +1,5 @@
 #include "led.h"
+#include "gpio.h"
 
 #include <stdio.h>
 
@@ -6,6 +7,7 @@ void led_on(struct LED *led)
 {
     if (led->state == LED_OFF)
     {
+        gpio_set_pin(led->pin);
         led->state = LED_ON;
         led->times_turned_on++;
     }
@@ -13,6 +15,7 @@ void led_on(struct LED *led)
 
 void led_off(struct LED *led)
 {
+    gpio_clear_pin(led->pin);
     led->state = LED_OFF;
 }
 
