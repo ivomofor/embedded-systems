@@ -3,11 +3,11 @@ CC = gcc
 CFLAGS = -std=c2x -Wall -Wextra -Wpedantic -g -Iinclude
 
 TARGET = embedded_demo
-SOURCES = src/main.c src/led.c src/gpio.c
+SOURCES = src/main.c src/led.c src/gpio_sim.c
 
 TEST_TARGET = tests/test_gpio
 TEST_SOURCE = tests/test_gpio.c
-TEST_SUPPORT = src/gpio.c
+TEST_SUPPORT = src/gpio_sim.c
 
 .PHONY: all clean test
 
@@ -23,4 +23,4 @@ test: $(TEST_TARGET)
 	./$(TEST_TARGET)
 
 clean:
-	rm -f $(TARGET) $(TEST_TARGET) main.o led.o gpio.o
+	rm -f $(TARGET) $(TEST_TARGET) main.o led.o gpio.o gpio_sim.o

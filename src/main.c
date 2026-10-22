@@ -4,20 +4,25 @@
 
 int main(void)
 {
-    gpio_set_pin(0);
-    gpio_set_pin(2);
-
     printf("Initial register: 0x%02X\n",
            (unsigned int)gpio_read_register());
 
-    printf("\nTrying to turn on invalid pin 8...\n");
-    gpio_set_pin(8);
+    gpio_set_pin(0);
+    gpio_set_pin(3);
 
-    printf("Register after invalid operation: 0x%02X\n",
+    printf("After setting pins 0 and 3: 0x%02X\n",
            (unsigned int)gpio_read_register());
 
-    printf("Reading invalid pin 8: %u\n",
-           (unsigned int)gpio_is_pin_set(8));
+    gpio_clear_pin(0);
+
+    printf("After clearing pin 0: 0x%02X\n",
+           (unsigned int)gpio_read_register());
+
+    printf("Pin 0 state: %u\n",
+           (unsigned int)gpio_is_pin_set(0));
+
+    printf("Pin 3 state: %u\n",
+           (unsigned int)gpio_is_pin_set(3));
 
     return 0;
 }
